@@ -1,0 +1,60 @@
+{% extends 'blog/index.html' %}
+{% block body %}
+    
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">S. No.</th>
+            <th scope="col">Blog Title</th>
+            <th scope="col">Blog Discription</th>
+            <th scope="col">Reg Date</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        <h2>{{cat.cname}}</h2>
+
+        {% for b in blog_list %}
+          <tr class="table-active">
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{b.title}}</td>
+            <td>{{b.discrption}}</td>
+            <td>{{b.regdate}}</td>
+            <td><a class="btn btn-primary" href="{{ b.pk}}/update" role ="button">Update</a></td>
+            <td>
+                <!-- Button trigger modal -->
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+						  Delete
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Delete Blog</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        Are you sure you want to delete {{ b.title }} ?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						        <a class="btn btn-primary" href="{{b.pk}}/delete" role ="button">Okay</a>
+						        <!-- <button type="button" class="btn btn-primary">Okay</button> -->
+
+						      </div>
+						    </div>
+						  </div>
+						</div>
+            </td>
+            
+          </tr>
+        {% endfor %}  
+        </tbody>
+    </table>
+
+{% endblock %}

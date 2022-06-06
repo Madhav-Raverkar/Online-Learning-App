@@ -1,0 +1,196 @@
+{% load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   
+    <title>Blog</title>
+  </head>
+
+  <body style="background-color: lightgreen
+   ;">
+
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <!-- Start navbar-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">BLOG</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'blog:home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:contact' %}">Contact us</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success mx-2" type="submit">Search</button>
+            </form>
+          </div>
+              <!-- Start Modal Login -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userLoginModal">
+          Login
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="userLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="/user/userlogin/" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Login ID</label>
+            <input type="email" name="lid" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Login ID">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Password</label>
+            <input type="password" name="lpwd" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Modal login-->
+        
+            <!-- Start Modal Reg -->
+                <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#userRegModal">
+          Register
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="userRegModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User Register</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="/user/userreg/" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">User Name</label>
+            <input type="text" name="unm" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter User Name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email ID</label>
+            <input type="email" name="eid" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email ID">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Mobile Number</label>
+            <input type="number" name="mno" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Mobile Number">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Password</label>
+            <input type="password" name="pwd" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Confirm Password</label>
+            <input type="password" name="rpwd" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Confirm Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Register / SignUp</button>
+        </form>
+        
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Modal Reg -->
+        
+
+      
+      
+        </div>
+      </nav>
+            <!-- End navbar-->
+          </div>
+        </div>
+        <!-- start -->
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://neilpatel.com/wp-content/uploads/2017/02/blogging.jpg" class="a-block w-100" alt="...">
+            </div>
+          </div>
+        </div>
+        {% for blog in blog_list %}
+        <div class="card bg-light" >
+          <div class="card-body">
+            <h5 class="card-title">{{ blog.title }} || {{ blog.cname }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Posted at {{ blog.regdate }}</h6>
+            <p class="card-text">{{ blog.discrption }}</p>
+          </div>
+        </div>
+    
+        {% endfor %}
+        
+
+      
+
+      <footer class="page-footer bg-light" style="min-height:50px; 
+        background:PapayaWhip; ">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">Blogs</h5>
+              <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur vero quidem dolorem iure fugiat aut nemo eos, corrupti, temporibus accusantium, sunt impedit voluptates eveniet nihil quo sapiente similique cupiditate distinctio.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              <h5 class="white-text">Links</h5>
+              <ul>
+                <li><a  href="#!">Facebook</a></li>
+                <li><a  href="#!">Instagram</a></li>
+                <li><a  href="#!">Twitter</a></li>
+                <li><a  href="#!">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          © 2022 Copyright Text
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+          </div>
+        </div>
+      </footer>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
